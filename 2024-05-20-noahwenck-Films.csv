@@ -1,0 +1,96 @@
+name,director,year,language,country,runtime,avg_rating
+Dune: Part Two,['Denis Villeneuve'],2024,['English'],['USA'],167,4.48
+Godzilla Minus One,['Takashi Yamazaki'],2023,"['Japanese', 'English']",['Japan'],125,4.15
+The Killer,['David Fincher'],2023,"['English', 'French', 'Spanish']",['USA'],118,3.41
+The Boy and the Heron,['Hayao Miyazaki'],2023,['Japanese'],['Japan'],124,3.96
+Perfect Days,['Wim Wenders'],2023,"['Japanese', 'English']","['Germany', 'Japan']",124,4.26
+Killers of the Flower Moon,['Martin Scorsese'],2023,"['English', 'French', 'Latin']",['USA'],206,4.1
+Jujutsu Kaisen 0,['Sunghoo Park'],2021,['Japanese'],['Japan'],105,3.93
+Dune,['Denis Villeneuve'],2021,"['English', 'Chinese']",['USA'],155,3.9
+Weathering with You,['Makoto Shinkai'],2019,['Japanese'],['Japan'],112,3.65
+Flavors of Youth,"['Yoshitaka Takeuchi', 'Xiaoxing Yi', 'Li Haoling']",2018,"['Chinese', 'Cantonese']","['China', 'Japan']",74,3.26
+El Camino Christmas,['David E. Talbert'],2017,['English'],['USA'],97,2.43
+Okja,['Bong Joon-ho'],2017,"['English', 'Spanish', 'Korean']","['South Korea', 'USA']",122,3.7
+A Silent Voice,['Naoko Yamada'],2016,['Japanese'],['Japan'],130,4.16
+Shin Godzilla,"['Hideaki Anno', 'Shinji Higuchi']",2016,"['Japanese', 'Italian', 'German', 'English']",['Japan'],120,3.85
+Your Name.,['Makoto Shinkai'],2016,['Japanese'],['Japan'],106,4.21
+Happy Hour,['Ryūsuke Hamaguchi'],2015,['Japanese'],['Japan'],317,4.21
+Snowpiercer,['Bong Joon-ho'],2013,"['Korean', 'English', 'French', 'Japanese']","['Czechia', 'South Korea']",127,3.69
+LEGO: The Adventures of Clutch Powers,['Howard E. Baker'],2010,['English'],['USA'],81,3.42
+Fantastic Mr. Fox,['Wes Anderson'],2009,"['English', 'French', 'Latin']",['USA'],87,4.27
+Kung Fu Panda,"['Mark Osborne', 'John Stevenson']",2008,['English'],['USA'],90,3.85
+5 Centimeters per Second,['Makoto Shinkai'],2007,['Japanese'],['Japan'],63,3.54
+Howl's Moving Castle,['Hayao Miyazaki'],2004,['Japanese'],['Japan'],119,4.32
+Moolaadé,['Ousmane Sembène'],2004,"['Bambara', 'French']","['Burkina Faso', 'Cameroon', 'France', 'Morocco', 'Senegal', 'Tunisia', 'Bermuda']",124,3.94
+Oldboy,['Park Chan-wook'],2003,['Korean'],['South Korea'],120,4.39
+Memories of Murder,['Bong Joon-ho'],2003,"['Korean', 'English']",['South Korea'],131,4.41
+Voices of a Distant Star,['Makoto Shinkai'],2002,['Japanese'],['Japan'],25,3.13
+Spirited Away,['Hayao Miyazaki'],2001,['Japanese'],['Japan'],125,4.45
+Shrek,"['Andrew Adamson', 'Vicky Jenson']",2001,['English'],['USA'],90,4.07
+In the Mood for Love,['Wong Kar-wai'],2000,"['Cantonese', 'French', 'Spanish']","['France', 'Hong Kong', 'Netherlands']",99,4.4
+April Story,['Shunji Iwai'],1998,"['Japanese', 'English']",['Japan'],67,3.78
+Cure,['Kiyoshi Kurosawa'],1997,['Japanese'],['Japan'],111,4.24
+Fargo,['Joel Coen'],1996,['English'],"['UK', 'USA']",98,4.21
+Gamera: Guardian of the Universe,['Shusuke Kaneko'],1995,['Japanese'],['Japan'],96,3.58
+My Neighbor Totoro,['Hayao Miyazaki'],1988,['Japanese'],['Japan'],86,4.19
+Castle in the Sky,['Hayao Miyazaki'],1986,['Japanese'],['Japan'],125,4.04
+Ran,['Akira Kurosawa'],1985,['Japanese'],"['Japan', 'France']",160,4.5
+Mishima: A Life in Four Chapters,['Paul Schrader'],1985,"['Japanese', 'English']","['Japan', 'USA']",121,4.42
+Taipei Story,['Edward Yang'],1985,['Chinese'],['Taiwan'],120,4.05
+The Makioka Sisters,['Kon Ichikawa'],1983,['Japanese'],['Japan'],140,3.63
+Raging Bull,['Martin Scorsese'],1980,['English'],['USA'],129,4.25
+Stalker,['Andrei Tarkovsky'],1979,['Russian'],['USSR'],162,4.43
+Alien,['Ridley Scott'],1979,"['English', 'Spanish']","['USA', 'UK']",117,4.27
+Ballad of Orin,['Masahiro Shinoda'],1977,['Japanese'],['Japan'],118,3.71
+Monty Python and the Holy Grail,"['Terry Gilliam', 'Terry Jones']",1975,"['English', 'French', 'Latin']",['UK'],91,4.13
+The Bread and Alley,['Abbas Kiarostami'],1970,['Persian\xa0(Farsi)'],['Iran'],12,3.64
+All Monsters Attack,['Ishirō Honda'],1969,['Japanese'],['Japan'],70,2.18
+Destroy All Monsters,['Ishirō Honda'],1968,"['Japanese', 'French']",['Japan'],89,3.29
+2001: A Space Odyssey,['Stanley Kubrick'],1968,"['English', 'Russian']","['UK', 'USA']",149,4.3
+Son of Godzilla,['Jun Fukuda'],1967,['Japanese'],['Japan'],86,2.7
+Le Samouraï,['Jean-Pierre Melville'],1967,['French'],"['France', 'Italy']",105,4.25
+"Ebirah, Horror of the Deep",['Jun Fukuda'],1966,['Japanese'],['Japan'],87,2.98
+Au Hasard Balthazar,['Robert Bresson'],1966,"['French', 'Latin']","['France', 'Sweden']",96,4.08
+Invasion of Astro-Monster,['Ishirō Honda'],1965,"['Japanese', 'English']",['Japan'],96,3.2
+Two,['Satyajit Ray'],1965,['No spoken language'],['India'],12,4.0
+"Ghidorah, the Three-Headed Monster",['Ishirō Honda'],1964,['Japanese'],['Japan'],92,3.38
+Mothra vs. Godzilla,['Ishirō Honda'],1964,['Japanese'],['Japan'],89,3.45
+High and Low,['Akira Kurosawa'],1963,['Japanese'],['Japan'],142,4.59
+Winter Light,['Ingmar Bergman'],1963,['Swedish'],['Sweden'],80,4.24
+An Autumn Afternoon,['Yasujirō Ozu'],1962,['Japanese'],['Japan'],114,4.21
+King Kong vs. Godzilla,['Ishirō Honda'],1962,"['Japanese', 'English']",['Japan'],97,3.06
+Cléo from 5 to 7,['Agnès Varda'],1962,['French'],"['France', 'Italy']",90,4.2
+The Inheritance,['Masaki Kobayashi'],1962,['Japanese'],['Japan'],108,3.78
+The End of Summer,['Yasujirō Ozu'],1961,['Japanese'],['Japan'],103,3.96
+The Human Condition III: A Soldier's Prayer,['Masaki Kobayashi'],1961,"['Japanese', 'Chinese', 'Russian']",['Japan'],190,4.56
+Late Autumn,['Yasujirō Ozu'],1960,['Japanese'],['Japan'],128,4.09
+The Housemaid,['Kim Ki-young'],1960,['Korean'],['South Korea'],108,3.77
+Psycho,['Alfred Hitchcock'],1960,['English'],['USA'],109,4.32
+The Human Condition II: Road to Eternity,['Masaki Kobayashi'],1959,"['Japanese', 'Chinese', 'Russian']",['Japan'],178,4.41
+Floating Weeds,['Yasujirō Ozu'],1959,['Japanese'],['Japan'],115,4.1
+The 400 Blows,['François Truffaut'],1959,"['French', 'English']",['France'],99,4.32
+The Human Condition I: No Greater Love,['Masaki Kobayashi'],1959,"['Japanese', 'Chinese']",['Japan'],206,4.5
+Wild Strawberries,['Ingmar Bergman'],1957,"['Swedish', 'Latin']",['Sweden'],91,4.33
+The Blue Sky Maiden,['Yasuzō Masumura'],1957,['Japanese'],['Japan'],89,3.82
+The Seventh Seal,['Ingmar Bergman'],1957,['Swedish'],['Sweden'],96,4.34
+I Will Buy You,['Masaki Kobayashi'],1956,['Japanese'],['Japan'],111,3.53
+The Thick-Walled Room,['Masaki Kobayashi'],1956,"['Japanese', 'English']",['Japan'],110,3.57
+Aparajito,['Satyajit Ray'],1956,"['Bengali, Bangla', 'Sanskrit (Saṁskṛta)', 'English']",['India'],110,4.22
+Godzilla Raids Again,['Motoyoshi Oda'],1955,['Japanese'],['Japan'],82,2.69
+Godzilla,['Ishirō Honda'],1954,['Japanese'],['Japan'],96,4.04
+La Strada,['Federico Fellini'],1954,['Italian'],['Italy'],115,4.17
+Seven Samurai,['Akira Kurosawa'],1954,['Japanese'],['Japan'],207,4.6
+Ugetsu,['Kenji Mizoguchi'],1953,['Japanese'],['Japan'],96,4.25
+Ikiru,['Akira Kurosawa'],1952,['Japanese'],['Japan'],143,4.52
+Rashomon,['Akira Kurosawa'],1950,['Japanese'],['Japan'],88,4.23
+Late Spring,['Yasujirō Ozu'],1949,['Japanese'],['Japan'],110,4.33
+Bicycle Thieves,['Vittorio De Sica'],1948,['Italian'],['Italy'],89,4.31
+Shoeshine,['Vittorio De Sica'],1946,"['Italian', 'English']",['Italy'],87,4.05
+"Rome, Open City",['Roberto Rossellini'],1945,"['Italian', 'German']",['Italy'],103,4.15
+Double Indemnity,['Billy Wilder'],1944,['English'],['USA'],107,4.26
+Humanity and Paper Balloons,['Sadao Yamanaka'],1937,['Japanese'],['Japan'],86,3.94
+Osaka Elegy,['Kenji Mizoguchi'],1936,['Japanese'],['Japan'],71,3.67
+A Story of Floating Weeds,['Yasujirō Ozu'],1934,['Japanese'],['Japan'],86,3.83
+Japanese Girls at the Harbor,['Hiroshi Shimizu'],1933,['No spoken language'],['Japan'],72,3.76
+Westfront 1918,['G.W. Pabst'],1930,"['German', 'French']",['Germany'],97,3.68
+All Quiet on the Western Front,['Lewis Milestone'],1930,"['English', 'French', 'German', 'Latin']",['USA'],133,4.14
