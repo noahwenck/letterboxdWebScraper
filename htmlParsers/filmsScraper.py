@@ -12,7 +12,6 @@ def getNumberOfFilmsPages(html):
     if the user has seen more than that we need to know how many other pages we need to go through
 
     :param html: html contents of $USER$/films page
-    :param url_sample: part of url used to find how many pages of films the user has
     :return: number of /films pages a user has
     """
 
@@ -44,9 +43,9 @@ def getListOfFilmNames(html):
     # Finds each distinct film in the list, parses for the name
     # todo: rename item to film ig? idk dont really care too much
     for item in re.finditer(start_of_item, htmlListOfPosters):
-        item_start = item.start() + htmlListOfPosters[item.start():].find("alt=\"")
-        item_end = htmlListOfPosters[item_start + 5:].find("\"")
-        list_of_films.append(htmlListOfPosters[item_start + 5:item_start + item_end + 5])
+        item_start = item.start() + htmlListOfPosters[item.start():].find("alt=\"") + 5
+        item_end = htmlListOfPosters[item_start:].find("\"")
+        list_of_films.append(htmlListOfPosters[item_start:item_start + item_end])
 
     return list_of_films
 
