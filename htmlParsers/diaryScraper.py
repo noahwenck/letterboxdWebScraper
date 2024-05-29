@@ -32,16 +32,23 @@ def getListOfDiaryEntries(user):
             entry_end = html[entry_start:].find("\"")
             name = html[entry_start:entry_start + entry_end]
 
+            # url
+            area_to_look = html[:html.find("alt=\"" + name + "\"")]
+            area_to_look = area_to_look[area_to_look.rfind("data-film-slug") + 16:]
+            film_part = area_to_look[:area_to_look.find("\"")]
+            url = "film/" + film_part + "/"
+
             # viewing date
             entry_start = entry.start() + html[entry.start():].find("data-viewing-date=\"") + 19
             entry_end = html[entry_start:].find("\"")
             viewing_date = html[entry_start:entry_start + entry_end]
 
             # review
-            review_lit = "data-review-text=\""  # todo do this for all for readability? or not idc
-            entry_start = entry.start() + html[entry.start():].find(review_lit) + len(review_lit)
-            entry_end = html[entry_start:].find("d") - 3  # note that this does not really care for special characters
-            review = html[entry_start:entry_start + entry_end]
+            # todo combine this and info call so that we are not making two gets
+            for_review = requests.get(BASE_URL + user + "/" + url).text
+            review_lit = "<meta name=\"description\" content=\""
+            for_review = for_review[len(review_lit) + for_review.find(review_lit):]
+            review = for_review[:for_review.find("\" />")]
 
             # rating
             entry_start = entry.start() + html[entry.start():].find("data-rating=\"") + 13
@@ -64,12 +71,6 @@ def getListOfDiaryEntries(user):
                 rewatch = True
             else:
                 rewatch = False
-
-            # url for info
-            area_to_look = html[:html.find("alt=\"" + name + "\"")]
-            area_to_look = area_to_look[area_to_look.rfind("data-film-slug") + 16:]
-            film_part = area_to_look[:area_to_look.find("\"")]
-            url = "film/" + film_part + "/"
 
             diary_entry = {
                 "name": name,
