@@ -1,9 +1,11 @@
 import ast
+import htmlParsers.filmParser as fp
 import re
 import requests
 
 BASE_URL = "https://letterboxd.com/"
 DIARY_PAGE = "/films/diary"
+
 
 def getListOfDiaryEntries(user):
     """
@@ -28,7 +30,7 @@ def getListOfDiaryEntries(user):
             # name
             entry_start = entry.start() + html[entry.start():].find("data-film-name=\"") + 16
             entry_end = html[entry_start:].find("\"")
-            name = html[entry_start:entry_start+entry_end]
+            name = html[entry_start:entry_start + entry_end]
 
             # viewing date
             entry_start = entry.start() + html[entry.start():].find("data-viewing-date=\"") + 19
@@ -36,9 +38,9 @@ def getListOfDiaryEntries(user):
             viewing_date = html[entry_start:entry_start + entry_end]
 
             # review
-            review_lit = "data-review-text=\"" #todo do this for all for readability? or not idc
+            review_lit = "data-review-text=\""  # todo do this for all for readability? or not idc
             entry_start = entry.start() + html[entry.start():].find(review_lit) + len(review_lit)
-            entry_end = html[entry_start:].find("d")-3 # note that this does not really care for special characters
+            entry_end = html[entry_start:].find("d") - 3  # note that this does not really care for special characters
             review = html[entry_start:entry_start + entry_end]
 
             # rating
@@ -63,13 +65,20 @@ def getListOfDiaryEntries(user):
             else:
                 rewatch = False
 
+            # url for info
+            area_to_look = html[:html.find("alt=\"" + name + "\"")]
+            area_to_look = area_to_look[area_to_look.rfind("data-film-slug") + 16:]
+            film_part = area_to_look[:area_to_look.find("\"")]
+            url = "film/" + film_part + "/"
+
             diary_entry = {
                 "name": name,
                 "viewing_date": viewing_date,
                 "review": review,
                 "rating": rating,
                 "tags": tags,
-                "rewatch": rewatch
+                "rewatch": rewatch,
+                "info": fp.get_film_info(url)
             }
             list_of_entries.append(diary_entry)
 

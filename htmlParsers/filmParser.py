@@ -1,3 +1,25 @@
+import requests
+
+BASE_URL = "https://letterboxd.com/"
+
+
+def get_film_info(url):
+    """
+    Returns a dict of info regarding a film (excluding its name)
+    :param url: url extension to ping the film's distinct page
+    :return: dict of film information
+    """
+    html = requests.get(BASE_URL + url).text
+
+    return {
+        "director": get_director(html),
+        "year": get_year(html),
+        "language": get_language(html),
+        "country": get_country(html),
+        "runtime": get_runtime(html),
+        "avg_rating": get_average_rating(html)
+    }
+
 def get_director(html):
     """
     Finds the director(s) of a film
