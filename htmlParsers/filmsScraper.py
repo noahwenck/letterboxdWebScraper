@@ -57,12 +57,12 @@ def getNumberOfFilmsPages(html):
     :return: number of /films pages a user has
     """
 
-    spot_to_look = html.rindex(FILMS_PAGE)
-    start = html[spot_to_look + len(FILMS_PAGE):].find(">")
-    # lmao good luck
-    num = html[spot_to_look + len(FILMS_PAGE) + start + 1:
-               spot_to_look + len(FILMS_PAGE) + html[spot_to_look + len(FILMS_PAGE):].find("<")]
-    return int(num)
+    num_start = html.rfind(FILMS_PAGE) + len(FILMS_PAGE)
+    num_end = num_start + html[num_start:].find("/")
+    try:
+        return int(html[num_start:num_end])
+    except ValueError:
+        return 1
 
 
 def getListOfFilmNames(html):

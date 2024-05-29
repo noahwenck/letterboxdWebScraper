@@ -1,6 +1,6 @@
-## Letterboxd Web Scraper
+# Letterboxd Web Scraper
 
-Web Scraper that allows you to save information (regardingfilms you've watched,
+Web Scraper that allows you to save information (regarding films you've watched,
 diary entries you've logged, etc.) to a .csv  or .txt file.
 
 ```commandline
@@ -10,12 +10,8 @@ Gathering letterboxd data, this may take a while (up to several minutes)
 
 Printing: tff-Diary
 
-{'name': 'The Killers', 'viewing_date': '2023-06-29', 'review': 'Join us for a free onli', 'rating': '0', 'tags': [],
-'rewatch': False, 'info': {'director': ['Don Siegel'], 'year': 1964, 'language': ['English'], 'country': ['USA'], 
-'runtime': 93, 'avg_rating': 3.56}}
-{'name': 'The Killers', 'viewing_date': '2023-06-29', 'review': 'Join us for a free onli', 'rating': '0', 'tags': [],
-'rewatch': False, 'info': {'director': ['Don Siegel'], 'year': 1964, 'language': ['English'], 'country': ['USA']
-'runtime': 93, 'avg_rating': 3.56}}
+{'name': 'The Killers', 'viewing_date': '2023-06-29', 'review': 'Join us for a free onli', 'rating': '0', 'tags': [], 'rewatch': False, 'info': {'director': ['Don Siegel'], 'year': 1964, 'language': ['English'], 'country': ['USA'], 'runtime': 93, 'avg_rating': 3.56}}
+{'name': 'The Killers', 'viewing_date': '2023-06-29', 'review': 'Join us for a free onli', 'rating': '0', 'tags': [], 'rewatch': False, 'info': {'director': ['Don Siegel'], 'year': 1964, 'language': ['English'], 'country': ['USA'], 'runtime': 93, 'avg_rating': 3.56}}
 ```
 
 ### Data Options

@@ -95,4 +95,7 @@ def getNumDiaryPages(html):
 
     num_start = html.rfind("diary/page/") + 11
     num_end = num_start + html[num_start:].find("/")
-    return int(html[num_start:num_end])
+    try:
+        return int(html[num_start:num_end])
+    except ValueError:
+        return 1

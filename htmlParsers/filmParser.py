@@ -106,4 +106,8 @@ def get_average_rating(html):
 
     rating_literal = "\"Average rating\" /><meta name=\"twitter:data2\" content=\""
     mod_html = html[html.find(rating_literal):]
-    return float(mod_html[len(rating_literal):mod_html.find(" out of 5")])
+    rating = mod_html[len(rating_literal):mod_html.find(" out of 5")]
+    if rating == "":
+        return float(-1)
+    else:
+        return float(rating)
