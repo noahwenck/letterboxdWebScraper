@@ -9,6 +9,7 @@ desc_message = "Collect info from letterboxd regarding a user's diary to a .csv 
 parser = argparse.ArgumentParser(description=desc_message)
 
 # REQUIRED
+#todo: add check for if user actually exists
 parser.add_argument("user", help="letterboxd username")
 
 # Utility Actions
