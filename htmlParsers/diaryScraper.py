@@ -7,7 +7,7 @@ BASE_URL = "https://letterboxd.com/"
 DIARY_PAGE = "/films/diary"
 
 
-def getListOfDiaryEntries(user):
+def get_list_of_diary_entries(user):
     """
     Collects information on entries in a user's diary
 
@@ -18,7 +18,7 @@ def getListOfDiaryEntries(user):
     html = requests.get(BASE_URL + user + DIARY_PAGE).text
 
     list_of_entries = []
-    for page in range(1, getNumDiaryPages(html) + 1):
+    for page in range(1, get_num_diary_pages(html) + 1):
 
         # Get new page since each only shows 50 entries
         if page != 1:
@@ -44,13 +44,17 @@ def getListOfDiaryEntries(user):
             viewing_date = html[entry_start:entry_start + entry_end]
 
             # review
-            # todo combine this and info call so that we are not making two gets
-            for_review = requests.get(BASE_URL + user + "/" + url).text
+            # todo fix special characters, review being cut off
+            film_html = requests.get(BASE_URL + user + "/" + url).text
             review_lit = "<meta name=\"description\" content=\""
-            for_review = for_review[len(review_lit) + for_review.find(review_lit):]
-            review = for_review[:for_review.find("\" />")]
+            if film_html.find(review_lit) > 0:
+                film_html = film_html[len(review_lit) + film_html.find(review_lit):]
+                review = film_html[:film_html.find("\" />")]
+            else:
+                review = ""
 
             # rating
+            # 0 indicates no rating
             entry_start = entry.start() + html[entry.start():].find("data-rating=\"") + 13
             entry_end = html[entry_start:].find("\"")
             rating = html[entry_start:entry_start + entry_end]
@@ -79,14 +83,14 @@ def getListOfDiaryEntries(user):
                 "rating": rating,
                 "tags": tags,
                 "rewatch": rewatch,
-                "info": fp.get_film_info(url)
+                "info": fp.get_film_info(film_html)
             }
             list_of_entries.append(diary_entry)
 
     return list_of_entries
 
 
-def getNumDiaryPages(html):
+def get_num_diary_pages(html):
     """
     Finds the number of diary pages we need to iterate through (each has 50 entries)
 

@@ -1,5 +1,5 @@
 import argparse
-from htmlParsers.diaryScraper import getListOfDiaryEntries
+from htmlParsers.diaryScraper import get_list_of_diary_entries
 from fileWriters.csvWriter import write_to_csv
 from fileWriters.txtWriter import write_to_txt
 
@@ -19,7 +19,7 @@ args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while (up to several minutes)\n")
 
-info = getListOfDiaryEntries(args.user)
+info = get_list_of_diary_entries(args.user)
 content = args.user + "-Diary"
 
 if args.print:

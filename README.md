@@ -4,7 +4,7 @@ Web Scraper that allows you to save information (regarding films you've watched,
 diary entries you've logged, etc.) to a .csv  or .txt file.
 
 ```commandline
-python films.py --print tff 
+> python films.py --print tff 
 
 Gathering letterboxd data, this may take a while (up to several minutes)
 
@@ -51,7 +51,7 @@ Printing: tff-Films
 | ``top250.py`` | Letterboxd's Top 250 Narrative Features List     |
 
 ### Arguments
-``user`` is necessary for collecting data regarding a particular user (``films.py``, ``diary.py``)
+``user`` is necessary when collecting data regarding a particular user (``films.py``, ``diary.py``)
 
 | Argument           | Description               |
 |--------------------|---------------------------|

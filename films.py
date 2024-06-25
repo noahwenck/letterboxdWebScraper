@@ -1,5 +1,5 @@
 import argparse
-from htmlParsers.filmsScraper import getFilmsPageInformation
+from htmlParsers.filmsScraper import get_films_page_information
 from fileWriters.csvWriter import write_to_csv
 from fileWriters.txtWriter import write_to_txt
 
@@ -19,7 +19,7 @@ args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while (up to several minutes)\n")
 
-info = getFilmsPageInformation(args.user)
+info = get_films_page_information(args.user)
 content = args.user + "-Films"
 
 if args.print:

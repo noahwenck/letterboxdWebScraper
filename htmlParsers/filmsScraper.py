@@ -6,7 +6,7 @@ BASE_URL = "https://letterboxd.com/"
 FILMS_PAGE = "/films/page/"
 
 
-def getFilmsPageInformation(user):
+def get_films_page_information(user):
     """
     Collects information regarding a users /films/ page to collect all the distinct films that a user has seen,
     compiles each film, with information (director, year, etc.) regarding each film into a single list
@@ -19,14 +19,14 @@ def getFilmsPageInformation(user):
     # todo make this cleaner
     # todo consider breaking logic into separate method
     films_html = requests.get(BASE_URL + user + "/films/").text
-    numFilmsPages = getNumberOfFilmsPages(films_html)
-    film_list = getListOfFilmNames(films_html)
-    url_list = getUrlsForFilms(films_html, film_list)
+    numFilmsPages = get_num_films_pages(films_html)
+    film_list = get_films_names(films_html)
+    url_list = get_films_urls(films_html, film_list)
     for page in range(2, numFilmsPages + 1):
         films_html = requests.get(BASE_URL + user + FILMS_PAGE + str(page)).text
-        new_films = getListOfFilmNames(films_html)
+        new_films = get_films_names(films_html)
         film_list += new_films
-        url_list += getUrlsForFilms(films_html, new_films)
+        url_list += get_films_urls(films_html, new_films)
 
     film_info = []
     for num in range(len(film_list)):
@@ -47,7 +47,7 @@ def getFilmsPageInformation(user):
     return film_info
 
 
-def getNumberOfFilmsPages(html):
+def get_num_films_pages(html):
     """
     Returns the number of /films pages a user has
     \nSince every page can only hold 72 films,
@@ -65,7 +65,7 @@ def getNumberOfFilmsPages(html):
         return 1
 
 
-def getListOfFilmNames(html):
+def get_films_names(html):
     """
     Returns a chronological array of the names of films listed on the given /films page
 
@@ -83,7 +83,6 @@ def getListOfFilmNames(html):
     list_of_films = []
 
     # Finds each distinct film in the list, parses for the name
-    # todo: rename item to film ig? idk dont really care too much
     for film in re.finditer(start_of_item, htmlListOfPosters):
         film_start = film.start() + htmlListOfPosters[film.start():].find("alt=\"") + 5
         film_end = film_start + htmlListOfPosters[film_start:].find("\"")
@@ -92,7 +91,7 @@ def getListOfFilmNames(html):
     return list_of_films
 
 
-def getUrlsForFilms(html, list_of_films):
+def get_films_urls(html, list_of_films):
     """
     Returns the extension of a url needed to ping the actual page of an individual film
 
