@@ -6,6 +6,13 @@ URL = "https://letterboxd.com/dave/list/official-top-250-narrative-feature-films
 
 
 def get_top_250_narrative_films():
+    """
+    Collects information and ranking of films on Letterboxd's Top 250 Narrative Features List.
+    General information regarding the film is stored in a sepearate dictionary, "info"
+
+    :return: a list of films on Letterboxd's Top 250 Narrative Features List
+    """
+
     html = requests.get(URL).text
 
     list_of_films = []
