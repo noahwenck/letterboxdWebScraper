@@ -83,7 +83,7 @@ def get_list_of_diary_entries(user):
                 "rating": rating,
                 "tags": tags,
                 "rewatch": rewatch,
-                "info": fp.get_film_info(film_html)
+                "info": fp.get_film_info(url)
             }
             list_of_entries.append(diary_entry)
 

@@ -3,12 +3,14 @@ import requests
 BASE_URL = "https://letterboxd.com/"
 
 
-def get_film_info(html):
+def get_film_info(url):
     """
     Returns a dict of info regarding a film (excluding its name)
-    :param html: html contents of the film page
+    :param url: url extension to ping the film's distinct page
     :return: dict of film information
     """
+
+    html = requests.get(BASE_URL + url).text
 
     return {
         "director": get_director(html),
