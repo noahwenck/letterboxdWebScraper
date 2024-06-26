@@ -44,12 +44,13 @@ Printing: tff-Films
 ```
 
 ### Data Options
-|      File to Call       | Description of Data Collected                    |
-|:-----------------------:|--------------------------------------------------|
-|      ``films.py``       | Distinct films a user has seen                   |
-|      ``diary.py``       | Diary Entries (including each viewing of a film) |
-|      ``top250.py``      | Letterboxd's Top 250 Narrative Features List     |
-|  ``top100Animated.py``  | Letterboxd's Top 100 Animated Films List         |
+|     File to Call      | Description of Data Collected                    |
+|:---------------------:|--------------------------------------------------|
+|     ``films.py``      | Distinct films a user has seen                   |
+|     ``diary.py``      | Diary Entries (including each viewing of a film) |
+|     ``top250.py``     | Letterboxd's Top 250 Narrative Features List     |
+| ``top100Animated.py`` | Letterboxd's Top 100 Animated Films List         |
+|  ``ebertGreats.py``   | Roger Ebert's Great Movies                       |
 
 ### Arguments
 ``user`` is necessary when collecting data regarding a particular user (``films.py``, ``diary.py``)
