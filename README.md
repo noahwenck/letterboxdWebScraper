@@ -44,17 +44,18 @@ Printing: tff-Films
 ```
 
 ### Data Options
-| File to Call  | Description of Data Collected                    |
-|---------------|--------------------------------------------------|
-| ``films.py``  | Distinct films a user has seen                   |
-| ``diary.py``  | Diary Entries (including each viewing of a film) |
-| ``top250.py`` | Letterboxd's Top 250 Narrative Features List     |
+|      File to Call       | Description of Data Collected                    |
+|:-----------------------:|--------------------------------------------------|
+|      ``films.py``       | Distinct films a user has seen                   |
+|      ``diary.py``       | Diary Entries (including each viewing of a film) |
+|      ``top250.py``      | Letterboxd's Top 250 Narrative Features List     |
+|  ``top100Animated.py``  | Letterboxd's Top 100 Animated Films List         |
 
 ### Arguments
 ``user`` is necessary when collecting data regarding a particular user (``films.py``, ``diary.py``)
 
-| Argument           | Description               |
-|--------------------|---------------------------|
+|      Argument      | Description               |
+|:------------------:|---------------------------|
 | ``--print`` ``-p`` | Print data to console     |
-| ``--csv`` ``-c``   | Write data to a .csv file |
-| ``--txt`` ``-t``   | Write data to a .txt file |
+|  ``--csv`` ``-c``  | Write data to a .csv file |
+|  ``--txt`` ``-t``  | Write data to a .txt file |
