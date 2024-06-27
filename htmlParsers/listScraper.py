@@ -3,6 +3,8 @@ import re
 import requests
 
 NARRATIVE_URL = "https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/"
+OSCAR_URL = "https://letterboxd.com/oscars/list/oscar-winning-films-best-picture/"
+CANNES_URL = "https://letterboxd.com/brsan/list/cannes-palme-dor-winners/"
 EBERT_URL = "https://letterboxd.com/dvideostor/list/roger-eberts-great-movies/"
 ANIMATED_URL = "https://letterboxd.com/lifeasfiction/list/letterboxd-100-animation/"
 
@@ -10,16 +12,19 @@ ANIMATED_URL = "https://letterboxd.com/lifeasfiction/list/letterboxd-100-animati
 def collect_films_from_list(selected_list):
     rank = True
     # todo: break into helper method for readability
-    if selected_list == "narrative":
-        list_url = NARRATIVE_URL
-        pages = 3
-    elif selected_list == "ebert":
-        list_url = EBERT_URL
-        pages = 3
-        rank = False
-    elif selected_list == "animation":
-        list_url = ANIMATED_URL
-        pages = 1
+    match selected_list:
+        case "narrative":
+            list_url = NARRATIVE_URL
+        case "oscar":
+            list_url = OSCAR_URL
+        case "cannes":
+            list_url = CANNES_URL
+            rank = False
+        case "ebert":
+            list_url = EBERT_URL
+            rank = False
+        case "animation":
+            list_url = ANIMATED_URL
 
     html = requests.get(list_url).text
 
@@ -27,7 +32,7 @@ def collect_films_from_list(selected_list):
         ranking = 1
 
     films = []
-    for page in range(1, pages + 1): # todo make get_num_pages instead of hardcoding
+    for page in range(1, fp.get_num_pages(html) + 1):
         if page != 1:
             html = requests.get(list_url + "/page/" + str(page)).text
 

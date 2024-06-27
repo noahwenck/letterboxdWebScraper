@@ -3,6 +3,22 @@ import requests
 BASE_URL = "https://letterboxd.com/"
 
 
+def get_num_pages(html):
+    """
+    Finds the number of pages that make up this list
+
+    :param html: html contents of the list page
+    :return: number of pages the list has
+    """
+
+    num_start = html.rfind("/page/") + 6
+    num_end = num_start + html[num_start:].find("/")
+    try:
+        return int(html[num_start:num_end])
+    except ValueError:
+        return 1
+
+
 def get_film_info(url):
     """
     Returns a dict of info regarding a film (excluding its name)

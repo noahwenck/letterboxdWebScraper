@@ -51,22 +51,24 @@ Collect the films that a user has interacted with.
 | ``films`` | Distinct films a user has seen                   |
 | ``diary`` | Diary Entries (including each viewing of a film) |
 
-Syntax:```>python user.py --csv USER SECTION ```
+Syntax: ```>python user.py --UTIL USER SECTION ```
 
 Example: ```>python user.py --csv tff films```
 
 ### ``list.py``
 Collect films from notable lists on Letterboxd.
 
-|     Input     | Letterboxd List                                                                                          |
-|:-------------:|----------------------------------------------------------------------------------------------------------|
-| ``narrative`` | [Top 250 Narrative Features](https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/) |
-|   ``ebert``   | [Roger Ebert's Great Movies](https://www.rogerebert.com/great-movies)                                    |
-| ``animation`` | [Top 100 Animation](https://letterboxd.com/lifeasfiction/list/letterboxd-100-animation/)                 |
+|     Input     | Letterboxd List                                                                                                                                                                                                                                                                                  |
+|:-------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ``narrative`` | [Top 250 Narrative Features](https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/)                                                                                                                                                                                         |
+|   ``oscar``   | [Oscar Best Picture Winners](https://awardsdatabase.oscars.org/search/getresults?query=%7B%22Sort%22%3A%223-Award%20Category-Chron%22%2C%22AwardCategory%22%3A%5B%2219%22%5D%2C%22AwardShowNumberFrom%22%3A1%2C%22AwardShowNumberTo%22%3A96%2C%22Search%22%3A30%2C%22IsWinnersOnly%22%3Atrue%7D) |
+|  ``cannes``   | [Cannes Palme d'Or Winners](https://letterboxd.com/brsan/list/cannes-palme-dor-winners/)                                                                                                                                                                                                         |
+|   ``ebert``   | [Roger Ebert's Great Movies](https://www.rogerebert.com/great-movies)                                                                                                                                                                                                                            |
+| ``animation`` | [Top 100 Animation](https://letterboxd.com/lifeasfiction/list/letterboxd-100-animation/)                                                                                                                                                                                                         |
 
-Syntax: ```>python list.py --csv LIST```
+Syntax: ```>python list.py --UTIL LIST```
 
-Example```> python list.py --csv animation```
+Example: ```> python list.py --csv animation```
 
 ### Utility Arguments
 

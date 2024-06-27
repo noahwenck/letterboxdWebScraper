@@ -15,9 +15,11 @@ parser = argparse.ArgumentParser(description=desc_message, formatter_class=argpa
 parser.add_argument("list",
                     help="The list to look at. Possible options:\n"
                          "Top 250 Narrative Features - narrative\n"
+                         "Oscar Best Picture Winners: oscar\n"
+                         "Cannes Palme d'Or Winners - cannes\n"
                          "Roger Ebert's Great Movies - ebert\n"
                          "Top 100 Animation - animation",
-                    choices=["narrative", "ebert", "animation"])
+                    choices=["narrative", "oscar", "cannes", "ebert", "animation"])
 
 # Utility Actions
 parser.add_argument("-p", "--print", help="print data to console", action="store_true")
@@ -32,6 +34,10 @@ info = collect_films_from_list(args.list)
 match args.list:
     case "narrative":
         content = "Top-250-Narrative"
+    case "oscar":
+        content = "Oscar-Best-Picture-Winners"
+    case "cannes":
+        content = "Cannes-Palme-d'Or-Winners"  # todo add ifOnlyYear bool or something (dont need day/month for awards lists)
     case "ebert":
         content = "Roger-Ebert-Great-Movies"
     case "animation":
