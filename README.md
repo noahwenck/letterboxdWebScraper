@@ -48,12 +48,22 @@ Printing: tff-Films
 |:---------------------:|--------------------------------------------------|
 |     ``films.py``      | Distinct films a user has seen                   |
 |     ``diary.py``      | Diary Entries (including each viewing of a film) |
-|     ``top250.py``     | Letterboxd's Top 250 Narrative Features List     |
-| ``top100Animated.py`` | Letterboxd's Top 100 Animated Films List         |
-|  ``ebertGreats.py``   | Roger Ebert's Great Movies                       |
+
+### ``list.py``
+``list.py`` allows you to generate .csv or .txt files containing information regarding notable lists on Letterboxd.
+
+|     Input     | Letterboxd List            |
+|:-------------:|----------------------------|
+| ``narrative`` | Top 250 Narrative Features |
+|   ``ebert``   | Roger Ebert's Great Movies |
+| ``animation`` | Top 100 Animation          |
+
+```> python list.py --csv animation```
+
 
 ### Arguments
 ``user`` is necessary when collecting data regarding a particular user (``films.py``, ``diary.py``)
+Use ``list`` when collecting data regarding a particular list (``list.py``)
 
 |      Argument      | Description               |
 |:------------------:|---------------------------|
