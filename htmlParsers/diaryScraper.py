@@ -18,7 +18,7 @@ def get_list_of_diary_entries(user):
     html = requests.get(BASE_URL + user + DIARY_PAGE).text
 
     list_of_entries = []
-    for page in range(1, get_num_diary_pages(html) + 1):
+    for page in range(1, fp.get_num_pages(html) + 1):
 
         # Get new page since each only shows 50 entries
         if page != 1:
@@ -76,6 +76,8 @@ def get_list_of_diary_entries(user):
             else:
                 rewatch = False
 
+            info = fp.get_film_info(url)
+
             diary_entry = {
                 "name": name,
                 "viewing_date": viewing_date,
@@ -83,24 +85,8 @@ def get_list_of_diary_entries(user):
                 "rating": rating,
                 "tags": tags,
                 "rewatch": rewatch,
-                "info": fp.get_film_info(url)
             }
+            diary_entry.update(info)
             list_of_entries.append(diary_entry)
 
     return list_of_entries
-
-
-def get_num_diary_pages(html):
-    """
-    Finds the number of diary pages we need to iterate through (each has 50 entries)
-
-    :param html: html contents of diary page
-    :return: number of diary pages a user has
-    """
-
-    num_start = html.rfind("diary/page/") + 11
-    num_end = num_start + html[num_start:].find("/")
-    try:
-        return int(html[num_start:num_end])
-    except ValueError:
-        return 1

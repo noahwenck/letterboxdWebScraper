@@ -18,11 +18,11 @@ def get_films_page_information(user):
     # find list of films names and list of urls to ping
     # todo make this cleaner
     # todo consider breaking logic into separate method
+    # todo make this like diaryScraper (can we make a userScraper to simplify?)
     films_html = requests.get(BASE_URL + user + "/films/").text
-    numFilmsPages = get_num_films_pages(films_html)
     film_list = get_films_names(films_html)
     url_list = get_films_urls(films_html, film_list)
-    for page in range(2, numFilmsPages + 1):
+    for page in range(2, fp.get_num_pages(films_html) + 1):
         films_html = requests.get(BASE_URL + user + FILMS_PAGE + str(page)).text
         new_films = get_films_names(films_html)
         film_list += new_films
@@ -45,24 +45,6 @@ def get_films_page_information(user):
         film_info.append(film)
 
     return film_info
-
-
-def get_num_films_pages(html):
-    """
-    Returns the number of /films pages a user has
-    \nSince every page can only hold 72 films,
-    if the user has seen more than that we need to know how many other pages we need to go through
-
-    :param html: html contents of $USER$/films page
-    :return: number of /films pages a user has
-    """
-
-    num_start = html.rfind(FILMS_PAGE) + len(FILMS_PAGE)
-    num_end = num_start + html[num_start:].find("/")
-    try:
-        return int(html[num_start:num_end])
-    except ValueError:
-        return 1
 
 
 def get_films_names(html):
