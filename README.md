@@ -4,7 +4,7 @@ Web Scraper that allows you to save information (regarding films you've watched,
 diary entries you've logged, etc.) to a .csv  or .txt file.
 
 ```commandline
-> python films.py --print tff 
+> python user.py --print tff films
 
 Gathering letterboxd data, this may take a while (up to several minutes)
 
@@ -43,27 +43,32 @@ Printing: tff-Films
 
 ```
 
-### Data Options
-|     File to Call      | Description of Data Collected                    |
-|:---------------------:|--------------------------------------------------|
-|     ``films.py``      | Distinct films a user has seen                   |
-|     ``diary.py``      | Diary Entries (including each viewing of a film) |
+### ``user.py``
+Collect the films that a user has interacted with.
+
+|   Input   | Description of Data                              |
+|:---------:|--------------------------------------------------|
+| ``films`` | Distinct films a user has seen                   |
+| ``diary`` | Diary Entries (including each viewing of a film) |
+
+Syntax:```>python user.py --csv USER SECTION ```
+
+Example: ```>python user.py --csv tff films```
 
 ### ``list.py``
-``list.py`` allows you to generate .csv or .txt files containing information regarding notable lists on Letterboxd.
+Collect films from notable lists on Letterboxd.
 
-|     Input     | Letterboxd List            |
-|:-------------:|----------------------------|
-| ``narrative`` | Top 250 Narrative Features |
-|   ``ebert``   | Roger Ebert's Great Movies |
-| ``animation`` | Top 100 Animation          |
+|     Input     | Letterboxd List                                                                                          |
+|:-------------:|----------------------------------------------------------------------------------------------------------|
+| ``narrative`` | [Top 250 Narrative Features](https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/) |
+|   ``ebert``   | [Roger Ebert's Great Movies](https://www.rogerebert.com/great-movies)                                    |
+| ``animation`` | [Top 100 Animation](https://letterboxd.com/lifeasfiction/list/letterboxd-100-animation/)                 |
 
-```> python list.py --csv animation```
+Syntax: ```>python list.py --csv LIST```
 
+Example```> python list.py --csv animation```
 
-### Arguments
-``user`` is necessary when collecting data regarding a particular user (``films.py``, ``diary.py``)
-Use ``list`` when collecting data regarding a particular list (``list.py``)
+### Utility Arguments
 
 |      Argument      | Description               |
 |:------------------:|---------------------------|
