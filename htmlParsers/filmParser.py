@@ -1,14 +1,16 @@
+import ast
 import requests
+import unicodedata
 
 BASE_URL = "https://letterboxd.com/"
 
 
 def get_num_pages(html):
     """
-    Finds the number of pages that make up this list
+    Finds the number of pages that must be iterated over
 
-    :param html: html contents of the list page
-    :return: number of pages the list has
+    :param html: html contents of the page
+    :return: number of pages
     """
 
     num_start = html.rfind("/page/") + 6
@@ -22,6 +24,7 @@ def get_num_pages(html):
 def get_film_info(url):
     """
     Returns a dict of info regarding a film (excluding its name)
+
     :param url: url extension to ping the film's distinct page
     :return: dict of film information
     """
@@ -31,16 +34,20 @@ def get_film_info(url):
     return {
         "director": get_director(html),
         "year": get_year(html),
-        "language": get_language(html),
+        "primary_language": get_primary_language(html),
+        "spoken_language": get_spoken_languages(html),
         "country": get_country(html),
         "runtime": get_runtime(html),
-        "avg_rating": get_average_rating(html)
+        "avg_rating": get_average_rating(html),
+        "genre": get_genre(html),
+        "cast": get_cast(html)
     }
 
 
 def get_director(html):
     """
     Finds the director(s) of a film
+
     :param html: html of a films homepage
     :return: list of director(s)
     """
@@ -58,6 +65,7 @@ def get_director(html):
 def get_year(html):
     """
     Finds the release year of a film
+
     :param html: html of a films homepage
     :return: year (int)
     """
@@ -66,30 +74,46 @@ def get_year(html):
     return int(mod_html[mod_html.find(">") + 1:mod_html.find("<")])
 
 
-def get_language(html):
+def get_primary_language(html):
     """
-    Finds the language(s) of a film
+    Finds the primary language of a film
+
     :param html: html of a films homepage
-    :return: list of language(s)
+    :return: primary language
     """
 
+    mod_html = html[html.find("/films/language/"):]
+    primary_language = mod_html[mod_html.find(">") + 1:mod_html.find("<")]
+    primary_language = unicodedata.normalize('NFKD', primary_language)
+    return primary_language
+
+
+def get_spoken_languages(html):
+    """
+    Finds the spoken language(s) of a film
+
+    :param html: html of a films homepage
+    :return: list of spoken languages
+    """
     mod_html = html
-    language = []
+    spoken_languages = []
     for i in range(html.count("/films/language/")):
         cry = mod_html[mod_html.find("/films/language/"):]
         mod_html = cry[21:2000]
         new_language = cry[cry.find(">") + 1:cry.find("<")]
+        new_language = unicodedata.normalize('NFKD', new_language)
 
-        # prevent overlap of Primary and Spoken languages
-        if new_language not in language:
-            language.append(cry[cry.find(">") + 1:cry.find("<")])
+        # prevent overlap of Primary and Spoken languages (Primary isn't appended twice)
+        if new_language not in spoken_languages:
+            spoken_languages.append(new_language)
 
-    return language
+    return spoken_languages
 
 
 def get_country(html):
     """
-    Finds the country of countries of a film
+    Finds the country/countries of a film
+
     :param html: html of a films homepage
     :return: list of country or countries
     """
@@ -107,6 +131,7 @@ def get_country(html):
 def get_runtime(html):
     """
     Finds the runtime of a film
+
     :param html: html of a films homepage
     :return: runtime of a film (int)
     """
@@ -118,6 +143,7 @@ def get_runtime(html):
 def get_average_rating(html):
     """
     Finds the average rating of a film
+
     :param html: html of a films homepage
     :return: average rating of a film (float)
     """
@@ -129,3 +155,37 @@ def get_average_rating(html):
         return float(-1)
     else:
         return float(rating)
+
+
+def get_genre(html):
+    """
+    Finds the genre(s) of a film
+
+    :param html: html of a films homepage
+    :return: list of genre(s)
+    """
+
+    mod_html = html[html.find("genre\":")+7:]
+    genre = mod_html[:mod_html.find(",\"@")]
+    genre = ast.literal_eval(genre)
+    return genre
+
+
+def get_cast(html):
+    """
+    Finds the cast of a film
+
+    :param html: html of a films homepage
+    :return: dict of cast, and their roles
+    """
+    # todo: fix special characters (just ' maybe)
+    mod_html = html
+    cast = {}
+    for i in range(html.count("a title=\"")):
+        crew_member_start = mod_html[mod_html.find("a title=\"") + 9:]
+        role = crew_member_start[:crew_member_start.find("\"")]
+        person = crew_member_start[crew_member_start.find(">") + 1:crew_member_start.find("<")]
+        mod_html = crew_member_start[10:]
+        cast[person] = role
+
+    return cast
