@@ -39,8 +39,8 @@ def get_film_info(url):
         "country": get_country(html),
         "runtime": get_runtime(html),
         "avg_rating": get_average_rating(html),
-        "genre": get_genre(html),
-        "cast": get_cast(html)
+        "genre": get_genre(html)
+        # "cast": get_cast(html) # removed for now, too noisy - add flag or something to not grab if desired
     }
 
 
@@ -186,6 +186,13 @@ def get_cast(html):
         role = crew_member_start[:crew_member_start.find("\"")]
         person = crew_member_start[crew_member_start.find(">") + 1:crew_member_start.find("<")]
         mod_html = crew_member_start[10:]
-        cast[person] = role
+        cast[fix_html_characters(person)] = fix_html_characters(role)
 
     return cast
+
+
+def fix_html_characters(string):
+    return string\
+        .replace("&#039;", "\'")\
+        .replace("&quot;", "\"")\
+        .replace("&amp;", "&")

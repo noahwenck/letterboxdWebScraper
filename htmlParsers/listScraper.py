@@ -2,36 +2,18 @@ import htmlParsers.filmParser as fp
 import re
 import requests
 
-NARRATIVE_URL = "https://letterboxd.com/dave/list/official-top-250-narrative-feature-films/"
-OSCAR_URL = "https://letterboxd.com/oscars/list/oscar-winning-films-best-picture/"
-CANNES_URL = "https://letterboxd.com/brsan/list/cannes-palme-dor-winners/"
-EBERT_URL = "https://letterboxd.com/dvideostor/list/roger-eberts-great-movies/"
-ANIMATED_URL = "https://letterboxd.com/lifeasfiction/list/letterboxd-100-animation/"
 
-
-def collect_films_from_list(selected_list):
-    rank = True
-    # todo: break into helper method for readability
-    match selected_list:
-        case "narrative":
-            list_url = NARRATIVE_URL
-        case "oscar":
-            list_url = OSCAR_URL
-        case "cannes":
-            list_url = CANNES_URL
-            rank = False
-        case "ebert":
-            list_url = EBERT_URL
-            rank = False
-        case "animation":
-            list_url = ANIMATED_URL
+def collect_films_from_list(list_url):
 
     html = requests.get(list_url).text
 
-    if rank:
+    if "<p class=\"list-number\">" in html:
+        rank = True
         ranking = 1
+    else:
+        rank = False
 
-    films = []
+    films = [find_list_name(html)]
     for page in range(1, fp.get_num_pages(html) + 1):
         if page != 1:
             html = requests.get(list_url + "/page/" + str(page)).text
@@ -49,17 +31,10 @@ def collect_films_from_list(selected_list):
 
             info = fp.get_film_info(url)
 
-            # todo: better way to do rank?
+            film = {}
             if rank:
-                film = {
-                    "ranking": ranking,
-                    "name": name
-                }
-            else:
-                film = {
-                    "name": name
-                }
-
+                film.update({"ranking": ranking})
+            film.update({"name": name})
             film.update(info)
             films.append(film)
 
@@ -67,3 +42,18 @@ def collect_films_from_list(selected_list):
                 ranking += 1
 
     return films
+
+
+def find_list_name(html):
+    """
+    Finds the name of the list
+
+    :param html: html contents of the first (or only) page of the list
+    :return: name of the list
+    """
+
+    name_marker = "<meta property=\"og:title\" content=\""
+    mod_html = html[html.find(name_marker) + len(name_marker):]
+    name = mod_html[:mod_html.find("\" />")]
+    name = fp.fix_html_characters(name)
+    return name.replace(" ", "-")

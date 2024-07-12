@@ -37,7 +37,8 @@ def get_films_page_information(user):
             "name": film_list[num],
             "director": fp.get_director(html),
             "year": fp.get_year(html),
-            "language": fp.get_language(html),
+            "primary_language": fp.get_primary_language(html),
+            "spoken_language": fp.get_spoken_languages(html),
             "country": fp.get_country(html),
             "runtime": fp.get_runtime(html),
             "avg_rating": fp.get_average_rating(html)
