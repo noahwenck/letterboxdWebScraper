@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(description=desc_message, formatter_class=argpa
 # REQUIRED
 #todo: add check for if user actually exists
 parser.add_argument("user", help="Letterboxd username")
+# todo: option to grab everything in one go
 parser.add_argument("section",
                     help="the section of a user's profile to look at.",
                     choices=["films", "diary"])
@@ -24,6 +25,9 @@ parser.add_argument("section",
 parser.add_argument("-p", "--print", help="print data to console", action="store_true")
 parser.add_argument("-c", "--csv", help="write data to a .csv file", action="store_true")
 parser.add_argument("-t", "--txt", help="write data to a .txt file", action="store_true")
+parser.add_argument("-e", "--everything",
+                    help="collect everything there is to collect (including cast and crew)",
+                    action="store_true")
 args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while. (up to several minutes)\n")
@@ -33,7 +37,7 @@ match args.section:
         info = get_films_page_information(args.user)
         content = args.user + "-Films"
     case "diary":
-        info = get_list_of_diary_entries(args.user)
+        info = get_list_of_diary_entries(args.user, args.everything)
         content = args.user + "-Diary"
 
 if args.print:

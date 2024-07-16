@@ -3,7 +3,7 @@ import re
 import requests
 
 
-def collect_films_from_list(list_url):
+def collect_films_from_list(list_url, everything):
 
     html = requests.get(list_url).text
 
@@ -29,7 +29,7 @@ def collect_films_from_list(list_url):
             film_part = area_to_look[:area_to_look.find("\"")]
             url = "film/" + film_part + "/"
 
-            info = fp.get_film_info(url)
+            info = fp.get_film_info(url, everything)
 
             film = {}
             if rank:

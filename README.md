@@ -6,7 +6,7 @@ diary entries you've logged, etc.) to a .csv  or .txt file.
 ### ``user.py``
 Collect the films that a user has interacted with.
 
-|   Input   | Description of Data                              |
+|  Section  | Description of Data                              |
 |:---------:|--------------------------------------------------|
 | ``films`` | Distinct films a user has seen                   |
 | ``diary`` | Diary Entries (including each viewing of a film) |
@@ -63,7 +63,7 @@ Printing: tff-Films
 ### ``list.py``
 Collect films from any list on Letterboxd. 
 
-Syntax: ```> python list.py --UTIL LIST```
+Syntax: ```> python list.py --UTIL URL```
 
 Example: 
 ``` commandline
@@ -90,9 +90,11 @@ Printing: 14-Favorite-Films-in-no-particular-order-(except-Potemkin)
 ```
 
 ### Utility Arguments
+Use these to define how you want the data outputted.
 
-|      Argument      | Description               |
-|:------------------:|---------------------------|
-| ``-p`` ``--print`` | Print data to console     |
-|  ``-c`` ``--csv``  | Write data to a .csv file |
-|  ``-t````--txt``   | Write data to a .txt file |
+|        Argument         | Description                                      |
+|:-----------------------:|--------------------------------------------------|
+|   ``-p`` ``--print``    | Print data to console                            |
+|    ``-c`` ``--csv``     | Write data to a .csv file                        |
+|    ``-t`` ``--txt``     | Write data to a .txt file                        |
+| ``-e`` ``--everything`` | Collect everything (Include Cast + Crew in data) |

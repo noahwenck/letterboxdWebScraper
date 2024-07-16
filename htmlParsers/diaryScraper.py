@@ -7,7 +7,7 @@ BASE_URL = "https://letterboxd.com/"
 DIARY_PAGE = "/films/diary"
 
 
-def get_list_of_diary_entries(user):
+def get_list_of_diary_entries(user, everything):
     """
     Collects information on entries in a user's diary
 
@@ -44,12 +44,14 @@ def get_list_of_diary_entries(user):
             viewing_date = html[entry_start:entry_start + entry_end]
 
             # review
-            # todo fix special characters, review being cut off
+            # todo: <p> as newline in the review
             film_html = requests.get(BASE_URL + user + "/" + url).text
-            review_lit = "<meta name=\"description\" content=\""
+            # review_lit = "<meta name=\"description\" content=\""
+            review_lit = "<div><p>"
             if film_html.find(review_lit) > 0:
                 film_html = film_html[len(review_lit) + film_html.find(review_lit):]
-                review = film_html[:film_html.find("\" />")]
+                review = film_html[:film_html.find("</p></div>")]
+                review = fp.fix_html_characters(review)
             else:
                 review = ""
 
@@ -76,7 +78,7 @@ def get_list_of_diary_entries(user):
             else:
                 rewatch = False
 
-            info = fp.get_film_info(url)
+            info = fp.get_film_info(url, everything)
 
             diary_entry = {
                 "name": name,
