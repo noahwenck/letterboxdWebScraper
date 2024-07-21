@@ -41,7 +41,8 @@ def get_film_info(url, everything):
         "country": get_country(html),
         "runtime": get_runtime(html),
         "avg_rating": get_average_rating(html),
-        "genre": get_genre(html)
+        "genre": get_genre(html),
+        "studio": get_studio(html)
     }
     if everything:
         everything_info = {
@@ -165,26 +166,6 @@ def get_average_rating(html):
         return float(rating)
 
 
-def get_studio(html):
-    """
-    Finds the studio(s) of a film
-
-    :param html: html of a films homepage
-    :return: list of studio(s)
-    """
-
-    studio_lit = "text-slug\">"
-
-    mod_html = html[html.find("Studios"):]
-    mod_html = mod_html[:mod_html.find("</div>")] # section off from rest of lists
-    studios = []
-    for studio_entry in re.finditer(studio_lit, mod_html):
-        studio = mod_html[studio_entry.start() + len(studio_lit):]
-        studio = studio[:studio.find("</a>")]
-        studios.append(studio)
-    return studios
-
-
 def get_genre(html):
     """
     Finds the genre(s) of a film
@@ -197,6 +178,26 @@ def get_genre(html):
     genre = mod_html[:mod_html.find(",\"@")]
     genre = ast.literal_eval(genre)
     return genre
+
+
+def get_studio(html):
+    """
+    Finds the studio(s) of a film
+
+    :param html: html of a films homepage
+    :return: list of studio(s)
+    """
+
+    studio_lit = "text-slug\">"
+
+    mod_html = html[html.find("Studio"):]
+    mod_html = mod_html[:mod_html.find("</div>")] # section off from rest of lists
+    studios = []
+    for studio_entry in re.finditer(studio_lit, mod_html):
+        studio = mod_html[studio_entry.start() + len(studio_lit):]
+        studio = studio[:studio.find("</a>")]
+        studios.append(studio)
+    return studios
 
 
 def get_cast(html):
