@@ -34,20 +34,20 @@ def get_film_info(url, everything):
     html = requests.get(BASE_URL + url).text
 
     info = {
-        "director": get_director(html),
-        "year": get_year(html),
-        "primary_language": get_primary_language(html),
-        "spoken_language": get_spoken_languages(html),
-        "country": get_country(html),
-        "runtime": get_runtime(html),
-        "avg_rating": get_average_rating(html),
-        "genre": get_genre(html),
-        "studio": get_studio(html)
+        "Director": get_director(html),
+        "Year": get_year(html),
+        "Primary Language": get_primary_language(html),
+        "Spoken Language": get_spoken_languages(html),
+        "Country": get_country(html),
+        "Runtime": get_runtime(html),
+        "Average Rating": get_average_rating(html),
+        "Genre": get_genre(html),
+        "Studio": get_studio(html)
     }
     if everything:
         everything_info = {
-            "cast": get_cast(html),
-            "crew": get_crew(html)
+            "Cast": get_cast(html),
+            "Crew": get_crew(html)
         }
         info.update(everything_info)
     return info
