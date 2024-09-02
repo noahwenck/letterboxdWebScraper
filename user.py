@@ -4,7 +4,7 @@ sys.dont_write_bytecode = True
 
 import argparse
 from htmlParsers.diaryScraper import get_list_of_diary_entries
-from htmlParsers.filmsScraper import get_films_page_information
+from htmlParsers.userScraper import get_page_type_information
 from fileWriters.csvWriter import write_to_csv
 from fileWriters.txtWriter import write_to_txt
 
@@ -19,7 +19,7 @@ parser.add_argument("user", help="Letterboxd username")
 # todo: option to grab everything in one go
 parser.add_argument("section",
                     help="the section of a user's profile to look at.",
-                    choices=["films", "diary"])
+                    choices=["films", "diary", "watchlist", "likes"])
 
 # Utility Actions
 parser.add_argument("-p", "--print", help="print data to console", action="store_true")
@@ -32,13 +32,12 @@ args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while. (up to several minutes)\n")
 
-match args.section:
-    case "films":
-        info = get_films_page_information(args.user)
-        content = args.user + "-Films"
-    case "diary":
-        info = get_list_of_diary_entries(args.user, args.everything)
-        content = args.user + "-Diary"
+if args.section == "diary": # todo merge into userScraper
+    info = get_list_of_diary_entries(args.user, args.everything)
+    content = args.user + "-Diary"
+else:
+    info = get_page_type_information(args.user, args.section)
+    content = args.user + "-" + args.section
 
 if args.print:
     print("Printing: " + content + "\n")

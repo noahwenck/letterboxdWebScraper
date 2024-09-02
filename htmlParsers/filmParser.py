@@ -22,6 +22,32 @@ def get_num_pages(html):
         return 1
 
 
+def get_film_name_from_list_page(html, film):
+    """
+    Returns the name of a film
+
+    :param html: html contents of page with films
+    :param film: re iter of each film entry on a page
+    :return: name of a film
+    """
+    start = film.start() + html[film.start():].find("alt=\"") + 5
+    end = start + html[start:].find("\"")
+    return html[start:end]
+
+
+def get_film_url_from_list_page(html, film):
+    """
+    Returns the extension of a url needed to ping the actual page of an individual film
+
+    :param html: html contents of page with films
+    :param film: re iter of each film entry on a page
+    :return: url ending of a film page
+    """
+    start = film.start() + html[film.start():].find("data-film-slug") + 16
+    end = start + html[start:].find("\"")
+    return "film/" + html[start:end] + "/"
+
+
 def get_film_info(url, everything):
     """
     Returns a dict of info regarding a film (excluding its name)
@@ -80,7 +106,11 @@ def get_year(html):
     """
 
     mod_html = html[html.find("/films/year/"):]
-    return int(mod_html[mod_html.find(">") + 1:mod_html.find("<")])
+    try:
+        return int(mod_html[mod_html.find(">") + 1:mod_html.find("<")])
+    except:
+        # Film has not been released yet, or for whatever reason there is no year listed.
+        return None
 
 
 def get_primary_language(html):
