@@ -6,10 +6,12 @@ diary entries you've logged, etc.) to a .csv  or .txt file.
 ### ``user.py``
 Collect the films that a user has interacted with.
 
-|  Section  | Description of Data                              |
-|:---------:|--------------------------------------------------|
-| ``films`` | Distinct films a user has seen                   |
-| ``diary`` | Diary Entries (including each viewing of a film) |
+|    Section    | Description of Data                              |
+|:-------------:|--------------------------------------------------|
+|   ``films``   | Distinct films a user has seen                   |
+|   ``diary``   | Diary Entries (including each viewing of a film) |
+| ``watchlist`` | Films on a user's watchlist                      |
+|   ``likes``   | Films a user has marked as liked                 |
 
 Syntax: ```> python user.py --UTIL USER SECTION ```
 

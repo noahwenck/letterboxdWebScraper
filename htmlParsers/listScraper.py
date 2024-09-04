@@ -1,4 +1,5 @@
 import htmlParsers.filmParser as fp
+import htmlParsers.pageParser as pp
 import re
 import requests
 
@@ -14,27 +15,17 @@ def collect_films_from_list(list_url, everything):
         rank = False
 
     films = [find_list_name(html)]
-    for page in range(1, fp.get_num_pages(html) + 1):
+    for page in range(1, pp.get_num_pages(html) + 1):
         if page != 1:
             html = requests.get(list_url + "/page/" + str(page)).text
 
-        for film in re.finditer("filmListEntry", html):
-            # name
-            start = film.start() + html[film.start():].find("alt=\"") + 5
-            end = start + html[start:].find("\"")
-            name = html[start:end]
-
-            area_to_look = html[:html.find("alt=\"" + name + "\"")]
-            area_to_look = area_to_look[area_to_look.rfind("data-film-slug") + 16:]
-            film_part = area_to_look[:area_to_look.find("\"")]
-            url = "film/" + film_part + "/"
-
-            info = fp.get_film_info(url, everything)
+        for entry in re.finditer("filmListEntry", html):
+            info = fp.get_film_info(pp.get_film_url_from_list_page(html, entry), everything)
 
             film = {}
             if rank:
-                film.update({"ranking": ranking})
-            film.update({"name": name})
+                film.update({"Ranking": ranking})
+            film.update({"Name": pp.get_film_name_from_list_page(html, entry)})
             film.update(info)
             films.append(film)
 
@@ -44,7 +35,7 @@ def collect_films_from_list(list_url, everything):
     return films
 
 
-def find_list_name(html):
+def find_list_name(html): # todo remove windows reserved chars
     """
     Finds the name of the list
 
@@ -56,4 +47,5 @@ def find_list_name(html):
     mod_html = html[html.find(name_marker) + len(name_marker):]
     name = mod_html[:mod_html.find("\" />")]
     name = fp.fix_html_characters(name)
+    name = name.replace(":", "")
     return name.replace(" ", "-")
