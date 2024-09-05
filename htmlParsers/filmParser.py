@@ -162,12 +162,16 @@ def get_genre(html):
     :return: list of genre(s)
     """
 
-    # todo: investigate issue from https://letterboxd.com/film/one-step-beyond-the-making-of-alien-resurrection/
-    # can test via this list: https://letterboxd.com/fantic/list/alien/
+    if html.find("genre\":") == -1:
+        return None
+
     mod_html = html[html.find("genre\":")+7:]
-    genre = mod_html[:mod_html.find(",\"@")]
-    genre = ast.literal_eval(genre)
-    return genre
+    if mod_html.find(",\"dateModified\":") != -1:
+        genre = mod_html[:mod_html.find(",\"dateModified\":")]
+        return ast.literal_eval(genre)
+    else:
+        genre = mod_html[:mod_html.find(",\"@")]
+        return ast.literal_eval(genre)
 
 
 def get_studio(html):
