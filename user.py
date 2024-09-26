@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while. (up to several minutes)\n")
 
-info = get_page_type_information(args.user, args.section)
+info = get_page_type_information(args.user, args.section, args.everything)
 content = args.user + "-" + args.section
 
 if args.print:

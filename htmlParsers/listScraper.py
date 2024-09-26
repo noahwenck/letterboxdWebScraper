@@ -25,12 +25,10 @@ def collect_films_from_list(list_url, everything):
             film = {}
             if rank:
                 film.update({"Ranking": ranking})
+                ranking += 1
             film.update({"Name": pp.get_film_name_from_list_page(html, entry)})
             film.update(info)
             films.append(film)
-
-            if rank:
-                ranking += 1
 
     return films
 

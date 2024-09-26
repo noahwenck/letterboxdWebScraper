@@ -8,12 +8,12 @@ BASE_URL = "https://letterboxd.com/"
 FILMS_PAGE = "/films/page/"
 
 
-def get_page_type_information(user, page_type):
+def get_page_type_information(user, page_type, everything):
     """
     Collects a list of the films present on a specific type of user page
 
     :param user: the letterboxd user
-    :param page_type: films, watchlist, likes, etc.
+    :param page_type: films, watchlist, likes, etc. (kind of hacky for tags)
     :return: a list of films found on the page
     """
 
@@ -35,7 +35,7 @@ def get_page_type_information(user, page_type):
             }
             if page_type == "/films/diary":
                 film.update(dep.get_diary_entry(html, entry, user, pp.get_film_url_from_list_page(html, entry)))
-            film.update(fp.get_film_info(pp.get_film_url_from_list_page(html, entry), False))
+            film.update(fp.get_film_info(pp.get_film_url_from_list_page(html, entry), everything))
             film_list.append(film)
 
     return film_list

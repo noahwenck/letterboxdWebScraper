@@ -1,4 +1,5 @@
 import ast
+from functools import lru_cache
 import re
 import requests
 import unicodedata
@@ -6,6 +7,7 @@ import unicodedata
 BASE_URL = "https://letterboxd.com/"
 
 
+@lru_cache(maxsize=None) # todo: what size? only for diary entries somehow?
 def get_film_info(url, everything):
     """
     Returns a dict of info regarding a film (excluding its name)
@@ -190,7 +192,7 @@ def get_studio(html):
     for studio_entry in re.finditer(studio_lit, mod_html):
         studio = mod_html[studio_entry.start() + len(studio_lit):]
         studio = studio[:studio.find("</a>")]
-        studios.append(studio)
+        studios.append(fix_html_characters(studio))
     return studios
 
 
