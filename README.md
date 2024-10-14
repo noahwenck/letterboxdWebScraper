@@ -100,3 +100,19 @@ Use these to define how you want the data outputted.
 |    ``-c`` ``--csv``     | Write data to a .csv file                        |
 |    ``-t`` ``--txt``     | Write data to a .txt file                        |
 | ``-e`` ``--everything`` | Collect everything (Include Cast + Crew in data) |
+
+---
+### Connect to Noda
+
+To use in tandem with [NodaApp](https://github.com/noahwenck/NodaApp), run the following to set up the
+flask app that Noda communicates with. 
+
+```
+py -m flask --app noda run
+```
+
+Connects to port 5000 by default. Feel free to verify connection via curl:
+
+```
+curl http://localhost:5000/ping
+```
