@@ -102,16 +102,21 @@ Use these to define how you want the data outputted.
 | ``-e`` ``--everything`` | Collect everything (Include Cast + Crew in data) |
 
 ---
-### Connect to Noda
+### Connect to Noda/Yamanaka
 
-To use in tandem with [NodaApp](https://github.com/noahwenck/NodaApp), run the following to set up the
-flask app that Noda communicates with. 
+To use with [NodaApp](https://github.com/noahwenck/NodaApp) run: 
 
 ```
 py -m flask --app noda run
 ```
 
-Connects to port 5000 by default. Feel free to verify connection via curl:
+or for [Yamanaka](https://github.com/noahwenck/yamanaka):
+
+```
+py -m flask --app yamanaka run
+```
+
+Connects to port 5000 by default, only one of these can run at a time. Feel free to verify connection via curl:
 
 ```
 curl http://localhost:5000/ping
