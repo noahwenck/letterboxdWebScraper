@@ -119,7 +119,7 @@ def get_country(html):
 
     mod_html = html
     country = []
-    for i in range(html.count("/films/country/")):
+    for _ in range(html.count("/films/country/")):
         cry = mod_html[mod_html.find("/films/country/"):]
         mod_html = cry[21:2000]
         country.append(cry[cry.find(">") + 1:cry.find("<")])
@@ -134,9 +134,10 @@ def get_runtime(html):
     :param html: html of a films homepage
     :return: runtime of a film (int)
     """
+    new_runtime_lit = "text-link text-footer\">\n\t\t\t\t\t\n\t\t\t\t\t"
 
-    mod_html = html[html.find("runTime: "):]
-    return int(mod_html[9:mod_html.find(" }"):])
+    mod_html = html[html.find(new_runtime_lit):]
+    return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):])
 
 
 def get_average_rating(html):
