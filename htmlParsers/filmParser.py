@@ -137,7 +137,7 @@ def get_runtime(html):
     new_runtime_lit = "text-link text-footer\">\n\t\t\t\t\t\n\t\t\t\t\t"
 
     mod_html = html[html.find(new_runtime_lit):]
-    return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):])
+    return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):].replace(',', ''))
 
 
 def get_average_rating(html):
