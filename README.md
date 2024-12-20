@@ -3,6 +3,21 @@
 Web Scraper that allows you to save information (regarding films you've watched,
 diary entries you've logged, etc.) to a .csv  or .txt file.
 
+---
+## Setup
+
+Install the required packages by running:
+
+```
+pip install -r requirements.txt
+```
+---
+## Running
+
+This project can either capture user data (`user.py`), or list data (`list.py`). It also connects to some of my other side
+projects [here](https://github.com/noahwenck/letterboxdWebScraper/tree/master?tab=readme-ov-file#connect-to-nodayamanaka).
+Read further to understand these uses.
+
 ### ``user.py``
 Collect the films that a user has interacted with.
 
