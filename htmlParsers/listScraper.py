@@ -45,5 +45,5 @@ def find_list_name(html): # todo remove windows reserved chars
     mod_html = html[html.find(name_marker) + len(name_marker):]
     name = mod_html[:mod_html.find("\" />")]
     name = fp.fix_html_characters(name)
-    name = name.replace(":", "")
+    name = name.replace(":", "").replace(",", "")
     return name.replace(" ", "-")
