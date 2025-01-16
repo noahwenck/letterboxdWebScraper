@@ -3,7 +3,8 @@ import sys
 sys.dont_write_bytecode = True
 
 import argparse
-from htmlParsers.userScraper import get_page_type_information
+from htmlParsers.filmParser import DataType
+import htmlParsers.userScraper as us
 from fileWriters.csvWriter import write_to_csv
 from fileWriters.txtWriter import write_to_txt
 
@@ -24,14 +25,14 @@ parser.add_argument("section",
 parser.add_argument("-p", "--print", help="print data to console", action="store_true")
 parser.add_argument("-c", "--csv", help="write data to a .csv file", action="store_true")
 parser.add_argument("-t", "--txt", help="write data to a .txt file", action="store_true")
-parser.add_argument("-e", "--everything",
-                    help="collect everything there is to collect (including cast and crew)",
-                    action="store_true")
+# parser.add_argument("-e", "--everything",
+#                     help="collect everything there is to collect (including cast and crew)",
+#                     action="store_true") todo: update to enum
 args = parser.parse_args()
 
 print("\nGathering letterboxd data, this may take a while. (up to several minutes)\n")
 
-info = get_page_type_information(args.user, args.section, args.everything)
+info = us.get_page_type_information(args.user, args.section, DataType.BARE)
 content = args.user + "-" + args.section
 
 if args.print:

@@ -1,4 +1,6 @@
 import ast
+import base64
+from enum import Enum
 from functools import lru_cache
 import re
 import requests
@@ -7,12 +9,18 @@ import unicodedata
 BASE_URL = "https://letterboxd.com/"
 
 
-@lru_cache(maxsize=None) # todo: what size? only for diary entries somehow?
-def get_film_info(url, everything):
+class DataType(Enum):
+    BARE = 0  # Basic data
+    NODA = 1  # Data for Noda - includes poster
+    FULL = 2  # All data I can grab for now - includes cast and crew
+
+
+@lru_cache(maxsize=None)
+def get_film_info(url, datatype):
     """
     Returns a dict of info regarding a film (excluding its name)
 
-    :param everything:
+    :param datatype: Type of data to collect (and for what purpose)
     :param url: url extension to ping the film's distinct page
     :return: dict of film information
     """
@@ -30,12 +38,15 @@ def get_film_info(url, everything):
         "Genre": get_genre(html),
         "Studio": get_studio(html)
     }
-    if everything:
-        everything_info = {
+    if datatype == DataType.NODA:
+        info.update({
+            "Base64 Poster": get_base64_poster(html)
+        })
+    elif datatype == DataType.FULL:
+        info.update({
             "Cast": get_cast(html),
             "Crew": get_crew(html)
-        }
-        info.update(everything_info)
+        })
     return info
 
 
@@ -168,7 +179,7 @@ def get_genre(html):
     if html.find("genre\":") == -1:
         return None
 
-    mod_html = html[html.find("genre\":")+7:]
+    mod_html = html[html.find("genre\":") + 7:]
     if mod_html.find(",\"dateModified\":") != -1:
         genre = mod_html[:mod_html.find(",\"dateModified\":")]
         return ast.literal_eval(genre)
@@ -188,7 +199,7 @@ def get_studio(html):
     studio_lit = "text-slug\">"
 
     mod_html = html[html.find("Studio"):]
-    mod_html = mod_html[:mod_html.find("</div>")] # section off from rest of lists
+    mod_html = mod_html[:mod_html.find("</div>")]  # section off from rest of lists
     studios = []
     for studio_entry in re.finditer(studio_lit, mod_html):
         studio = mod_html[studio_entry.start() + len(studio_lit):]
@@ -231,10 +242,10 @@ def get_crew(html):
     # Iterate over crew members
     for role in re.finditer(role_lit, html):
         mod_html = html[role.start() + len(role_lit):]
-        mod_html = mod_html[:mod_html.find("</div")] # section off html so that we don't grab everyone below
+        mod_html = mod_html[:mod_html.find("</div")]  # section off html so that we don't grab everyone below
         crew_role = mod_html[:mod_html.find("</")]
         if crew_role == "Director":
-            continue # ugly but works
+            continue  # ugly but works
 
         member_list = []
         for member in re.finditer(member_lit, mod_html):
@@ -246,11 +257,27 @@ def get_crew(html):
     return crew
 
 
-#todo: for maximum data can grab alt titles + nanogenres, but I'm not really interested in any of that for time being
+def get_base64_poster(html):
+    """
+    Finds the base64 encoded poster of a film
+
+    :param html: html of a films homepage
+    :return: base64 encoded poster
+    """
+    start_of_link = "{\"image\":\""
+    end_of_link = "\",\"@type\":\""
+    poster_link = html[html.find(start_of_link) + len(start_of_link):html.find(end_of_link)]
+
+    poster_data = requests.get(poster_link).content
+    base64_poster = base64.b64encode(poster_data).decode('utf-8')
+    return base64_poster
+
+
+# todo: for maximum data can grab alt titles + nanogenres, but I'm not really interested in any of that for time being
 
 
 def fix_html_characters(string):
-    return string\
-        .replace("&#039;", "\'")\
-        .replace("&quot;", "\"")\
+    return string \
+        .replace("&#039;", "\'") \
+        .replace("&quot;", "\"") \
         .replace("&amp;", "&")

@@ -4,7 +4,7 @@ import re
 import requests
 
 
-def collect_films_from_list(list_url, everything):
+def collect_films_from_list(list_url, datatype):
 
     html = requests.get(list_url).text
 
@@ -20,7 +20,7 @@ def collect_films_from_list(list_url, everything):
             html = requests.get(list_url + "/page/" + str(page)).text
 
         for entry in re.finditer("filmListEntry", html):
-            info = fp.get_film_info(pp.get_film_url_from_list_page(html, entry), everything)
+            info = fp.get_film_info(pp.get_film_url_from_list_page(html, entry), datatype)
 
             film = {}
             if rank:
