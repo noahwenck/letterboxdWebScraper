@@ -148,7 +148,10 @@ def get_runtime(html):
     new_runtime_lit = "text-link text-footer\">\n\t\t\t\t\t\n\t\t\t\t\t"
 
     mod_html = html[html.find(new_runtime_lit):]
-    return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):].replace(',', ''))
+    try:
+        return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):].replace(',', ''))
+    except ValueError:
+        return None  # In case no runtime is listed (ref. Black '67)
 
 
 def get_average_rating(html):
@@ -204,7 +207,8 @@ def get_studio(html):
     for studio_entry in re.finditer(studio_lit, mod_html):
         studio = mod_html[studio_entry.start() + len(studio_lit):]
         studio = studio[:studio.find("</a>")]
-        studios.append(fix_html_characters(studio))
+        if studio not in studios:   # prevent duplicates of studios (ref. Senna)
+            studios.append(fix_html_characters(studio))
     return studios
 
 
