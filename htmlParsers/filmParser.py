@@ -149,7 +149,7 @@ def get_runtime(html):
 
     mod_html = html[html.find(new_runtime_lit):]
     try:
-        return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;mins"):].replace(',', ''))
+        return int(mod_html[len(new_runtime_lit):mod_html.find("&nbsp;min"):].replace(',', ''))
     except ValueError:
         return None  # In case no runtime is listed (ref. Black '67)
 
