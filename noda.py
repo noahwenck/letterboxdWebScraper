@@ -23,6 +23,11 @@ def getUserInfoByType(username, type):
     return Response(status=204)
 
 
+@app.route("/health/check")
+def healthCheck():
+    return Response(status=200)
+
+
 @app.route("/ping")
 def ping():
     return "alive"
