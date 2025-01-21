@@ -30,6 +30,7 @@ def get_film_info(url, datatype):
     info = {
         "Director": get_director(html),
         "Year": get_year(html),
+        "Synopsis": get_synopsis(html),
         "Primary Language": get_primary_language(html),
         "Spoken Language": get_spoken_languages(html),
         "Country": get_country(html),
@@ -82,6 +83,19 @@ def get_year(html):
     except:
         # Film has not been released yet, or for whatever reason there is no year listed.
         return None
+
+
+def get_synopsis(html):
+    """
+    Finds the synopsis of a film
+
+    :param html: html of a films homepage
+    :return: synopsis of a film
+    """
+    truncate_literal = '''<div class="truncate" data-truncate="450">'''
+    mod_html = html[html.find(truncate_literal):]
+
+    return fix_html_characters(mod_html[mod_html.find("<p>") + 3:mod_html.find("</p>")])
 
 
 def get_primary_language(html):
