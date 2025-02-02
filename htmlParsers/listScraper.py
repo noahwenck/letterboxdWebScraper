@@ -14,7 +14,8 @@ def collect_films_from_list(list_url, datatype):
     else:
         rank = False
 
-    films = [find_list_name(html)]
+    # todo: verify this doesn't mess with anything non-noda
+    films = [{"List Name": find_list_name(html)}]
     for page in range(1, pp.get_num_pages(html) + 1):
         if page != 1:
             html = requests.get(list_url + "/page/" + str(page)).text
