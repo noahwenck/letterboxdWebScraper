@@ -1,9 +1,7 @@
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
 from flask_cors import CORS
 from htmlParsers.filmParser import DataType
 from htmlParsers import userScraper, listScraper
-import json
-import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -11,16 +9,16 @@ CORS(app)
 allowedTypes = ["films", "likes", "watchlist"]
 
 
+# todo: Add <dataType> to the route?
 @app.route("/<username>/<letterboxdType>")
 def getUserInfoByType(username, letterboxdType):
     if letterboxdType not in allowedTypes:
-        return "This is not an allowed type, type=" + letterboxdType
+        print("This is not an allowed type, type=" + letterboxdType)
+        return Response(status=400)
     films = userScraper.get_page_type_information(username, letterboxdType, DataType.NODA)
 
     # todo: add catch for failure to post/connect
-    requests.post("http://localhost:8080/input/films", params={"films": json.dumps(films)})
-
-    return Response(status=204)
+    return jsonify(films), 200
 
 
 @app.route("/list/<username>/<list_path>")
@@ -29,9 +27,7 @@ def getListInfo(username, list_path):
     listData = listScraper.collect_films_from_list(list_url, DataType.NODA)
 
     # todo: add catch for failure to post/connect
-    requests.post("http://localhost:8080/input/list", params={"list": json.dumps(listData)})
-
-    return Response(status=200)
+    return jsonify(listData), 200
 
 
 @app.route("/health/check")
@@ -42,3 +38,7 @@ def healthCheck():
 @app.route("/ping")
 def ping():
     return "alive"
+
+
+if __name__ == "__main__":
+    app.run()

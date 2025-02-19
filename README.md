@@ -119,10 +119,10 @@ Use these to define how you want the data outputted.
 ---
 ### Connect to Noda
 
-To use with [NodaApp](https://github.com/noahwenck/NodaApp) run: 
+To use with [noda](https://github.com/noahwenck/noda) run: 
 
 ```
-py -m flask --app noda run
+python shinoda.py
 ```
 
 Connects to port 5000 by default. Feel free to verify connection via curl:
