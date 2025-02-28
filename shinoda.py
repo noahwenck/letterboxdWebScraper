@@ -2,7 +2,6 @@ from flask import Flask, Response, jsonify
 from flask_cors import CORS
 from htmlParsers.filmParser import DataType
 from htmlParsers import userScraper, listScraper
-import random
 
 app = Flask(__name__)
 CORS(app)
@@ -29,14 +28,6 @@ def getListInfo(username, list_path):
 
     # todo: add catch for failure to post/connect
     return jsonify(listData), 200
-
-
-@app.route("/random/film/<username>")
-def getRandomFilm(username):
-    films = userScraper.get_page_type_information(username, "watchlist", DataType.NODA)
-    random_film = random.choice(films)
-
-    return jsonify(random_film), 200
 
 
 @app.route("/health/check")
