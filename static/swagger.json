@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Shinoda API (Letterboxd Web Scraper)",
+    "description": "API to easily export user/list data from Letterboxd.com (Unaffiliated).",
+    "version": "1.0.0"
+  },
+  "host": "https://shinoda-802129293606.us-central1.run.app",
+  "basePath": "/",
+  "schemes": "https",
+  "paths": {
+    "/{username}/{letterboxdType}": {
+      "get": {
+        "summary": "Export films from a section on a user's profile.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Letterboxd Username of the profile section to export."
+          },
+          {
+            "name": "letterboxdType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The section of the user's profile to export. Allowed sectiond: Films, Likes, Watchlist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contains a list of all films in the requested section of the user's profile.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string",
+                    "description": "Name of the film.",
+                    "example": "The Human Condition III: A Soldier's Prayer"
+                  },
+                  "Director": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All directors and/or co-directors of the film.",
+                    "example": ["Masaki Kobayashi"]
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "description": "Year of the film's release.",
+                    "example": 1961
+                  },
+                  "Synopsis": {
+                    "type": "string",
+                    "description": "Synopsis of the film.",
+                    "example": "The final part of The Human Condition."
+                  },
+                  "Primary Language": {
+                    "type": "string",
+                    "description": "The Primary language spoken in the film.",
+                    "example": "Japanese"
+                  },
+                  "Spoken Language": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All languages spoken in the film.",
+                    "example": ["Chinese", "Japanese", "Russian"]
+                  },
+                  "Country": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All countries where the film was filmed or produced.",
+                    "example": ["Japan"]
+                  },
+                  "Runtime": {
+                    "type": "integer",
+                    "description": "Runtime of the film in minutes.",
+                    "example": 190
+                  },
+                  "Average Rating": {
+                    "type": "number",
+                    "description": "Average rating of the film by Letterboxd users.",
+                    "example": 4.6
+                  },
+                  "Genre": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All genres the film fits into.",
+                    "example": ["History", "Drama", "War"]
+                  },
+                  "Studio": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All studios associated with the film's production.",
+                    "example": ["Ninjin Club"]
+                  },
+                  "Base64 Poster": {
+                    "type": "string",
+                    "description": "Base 64 encoded string of the film's poster.",
+                    "example": "Example Base 64 Encoded String"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user section was selected."
+          }
+        }
+      }
+    },
+    "/list/{username}/{list_path}": {
+      "get": {
+        "summary": "Export films from a Letterboxd list.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Letterboxd Username of the owner of the list."
+          },
+          {
+            "name": "letterboxdType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The title of the list, as it appears in the list's url. "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contains a list of all films in the requested Letterboxd list.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string",
+                    "description": "Name of the film.",
+                    "example": "The Human Condition III: A Soldier's Prayer"
+                  },
+                  "Director": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All directors and/or co-directors of the film.",
+                    "example": ["Masaki Kobayashi"]
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "description": "Year of the film's release.",
+                    "example": 1961
+                  },
+                  "Synopsis": {
+                    "type": "string",
+                    "description": "Synopsis of the film.",
+                    "example": "The final part of The Human Condition."
+                  },
+                  "Primary Language": {
+                    "type": "string",
+                    "description": "The Primary language spoken in the film.",
+                    "example": "Japanese"
+                  },
+                  "Spoken Language": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All languages spoken in the film.",
+                    "example": ["Chinese", "Japanese", "Russian"]
+                  },
+                  "Country": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All countries where the film was filmed or produced.",
+                    "example": ["Japan"]
+                  },
+                  "Runtime": {
+                    "type": "integer",
+                    "description": "Runtime of the film in minutes.",
+                    "example": 190
+                  },
+                  "Average Rating": {
+                    "type": "number",
+                    "description": "Average rating of the film by Letterboxd users.",
+                    "example": 4.6
+                  },
+                  "Genre": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All genres the film fits into.",
+                    "example": ["History", "Drama", "War"]
+                  },
+                  "Studio": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "All studios associated with the film's production.",
+                    "example": ["Ninjin Club"]
+                  },
+                  "Base64 Poster": {
+                    "type": "string",
+                    "description": "Base 64 encoded string of the film's poster.",
+                    "example": "Example Base 64 Encoded String"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/check": {
+      "get": {
+        "summary": "Health check for Noda's connection to Shinoda.",
+        "responses": {
+          "200": {
+            "description": "Connection established"
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "Simple check to see if Shinoda is alive.",
+        "responses": {
+          "200": {
+            "description": "Service is alive.",
+            "schema": {
+              "type": "string",
+              "example": "alive"
+            }
+          }
+        }
+      }
+    }
+  }
+}
