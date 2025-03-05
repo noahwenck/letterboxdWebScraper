@@ -133,7 +133,7 @@
             "description": "The Letterboxd Username of the owner of the list."
           },
           {
-            "name": "letterboxdType",
+            "name": "list_path",
             "in": "path",
             "required": true,
             "type": "string",
